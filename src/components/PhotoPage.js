@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
 const PhotosPage = ({ images, onHandleSelectImage, selectedImage }) => {
-    console.log(images, 'images');
-    console.log(selectedImage, 'selected');
+    // console.log(images, 'images');
+    // console.log(selectedImage, 'selected');
     return (
         <div className="col-md-6">
             <h2>Images</h2>
