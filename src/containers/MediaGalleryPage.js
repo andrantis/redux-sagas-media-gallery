@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
-import { flickrImages, shutterStockVideos } from '../Api/api';
+import { connect } from 'react-redux';
+import { searchMediaAction } from '../actions/mediaActions';
 
 // MediaGalleryPage Component
 class MediaGalleryPage extends Component {
 
-    // We want to get images and videos from the API right after our component renders.
+    // Dispatches *searchMediaAction* immediately after initial rendering.
+    // Note that we are using the dispatch method from the store to execute this task, courtesy of react-redux
     componentDidMount() {
-        flickrImages('rain').then(images => console.log(images, 'images'));
-        shutterStockVideos('rain').then(videos => console.log(videos, 'videos'));
+        this.props.dispatch(searchMediaAction('rain'));
     }
     
     render() {
+        console.log(this.props.images, 'Images');
+        console.log(this.props.videos, 'Videos');
+        console.log(this.props.selectedImage, 'SelectedImage');
+        console.log(this.props.selectedVideo, 'SelectedVideo');
         return (
             <div>
                 
@@ -19,4 +24,17 @@ class MediaGalleryPage extends Component {
     }
 }
 
-export default MediaGalleryPage;
+// Define PropTypes
+MediaGalleryPage.propTypes = {
+    // Define your PropTypes here
+}
+
+// Subscribe component to redux store and merge the state into component's props
+const mapStateToProps = ({ images, videos }) => ({
+    images: images[0],
+    selectedImage: images.selectedImage,
+    videos: videos[0],
+    selectedVideo: videos.selectedVideo
+});
+
+export default connect(mapStateToProps)(MediaGalleryPage);

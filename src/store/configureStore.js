@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-sage';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
-import rootSage from '../sagas'; // TODO: next step
+import rootSaga from '../sagas'; // TODO: next step
 
 // Returns the store instance
 // It can also take initialState argument when provided
@@ -10,7 +10,7 @@ const configureStore = () => {
     return {
         ...createStore(rootReducer,
             applyMiddleware(sagaMiddleware)),
-        runSaga: sagaMiddleware.run(rootSage)
+        runSaga: sagaMiddleware.run(rootSaga)
     };
 };
 
